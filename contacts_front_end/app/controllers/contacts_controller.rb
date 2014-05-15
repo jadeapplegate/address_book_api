@@ -24,7 +24,6 @@ class ContactsController < ApplicationController
   end
 
   def edit
-    
   end
 
   def update
@@ -42,12 +41,19 @@ class ContactsController < ApplicationController
   end
 
   def new_email
+    load_contact
     # Should return a view that allows the user to create an email
+    # render :new_email
+
   end
 
   def send_email
+    id = params[:id]
+
     # Does the actual sending of the email by calling
     # the other rails server
+    Typhoeus.post("http://localhost:3001/email.json", body: {contact: params[:email]})
+    redirect_to email_sent_path id
   end
 
   def sent_email
