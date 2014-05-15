@@ -43,11 +43,16 @@ gem 'better_errors'
 
 gem 'unicorn-rails', :groups => [:development, :test]
 
-gem 'dotenv-rails', :groups => [:development, :test]
+# gem 'dotenv-rails', :groups => [:development, :test]
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+
+group :development do
+  gem 'pry-rails'
+  gem 'dotenv-rails'
+end
 end
 
 # Use ActiveModel has_secure_password

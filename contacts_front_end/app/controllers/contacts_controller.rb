@@ -48,12 +48,14 @@ class ContactsController < ApplicationController
   end
 
   def send_email
-    id = params[:id]
+    load_contact
 
     # Does the actual sending of the email by calling
+    params[:email][:email] = @contact.email  
+    # email message's email address
     # the other rails server
-    Typhoeus.post("http://localhost:3001/email.json", body: {contact: params[:email]})
-    redirect_to email_sent_path id
+    Typhoeus.post("http://localhost:3001/email.json", params: { email: params[:email]})
+    redirect_to email_sent_path @contact
   end
 
   def sent_email

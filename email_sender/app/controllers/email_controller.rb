@@ -4,6 +4,8 @@ class EmailController < ApplicationController
   end
 
   def email
+  email = params[:email]
+  SiteMailer.status_email(email[:email], email[:subject], email[:body]).deliver
   render nothing: true, status: 200
   #   # respond_to do |format|
   #     if @email.save
